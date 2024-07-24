@@ -1,0 +1,20 @@
+#include<stdio.h>
+int main()
+{
+    int arr[5]={1,5,15,24,30};
+    for(int i=0;i<5;i++)
+    {
+        switch(arr[i])
+        {
+            case 1 ... 5:
+            printf("%d is in the range of 1to 5\n",arr[i]);
+            break;
+            case 6 ... 18:
+            printf("%d is in range of 5 to 18\n",arr[i]);
+            break;
+            default:
+            printf("not in an given range\n");
+        }
+    }
+    return 0;
+}
