@@ -1,0 +1,29 @@
+#include <stdio.h>
+unsigned long long factorial(int n) 
+{
+    if (n == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return n * factorial(n-1);
+    }
+}
+int main() 
+{
+    int n;
+    unsigned long long fact;
+    printf("Enter a non-negative integer to calculate its factorial: ");
+    scanf("%d", &n);
+    if (n < 0) 
+    {
+        printf("Error! Factorial of a negative number doesn't exist.\n");
+    } 
+    else 
+    {
+        fact = factorial(n);
+        printf("Factorial of %d = %llu\n", n, fact);
+    }
+    return 0;
+}
