@@ -1,0 +1,47 @@
+#include <stdio.h>
+int main() 
+{
+    int m1,n1,m2,n2,A[10][10],B[10][10],C[10][10],i,j,k,sum=0;
+    printf("Enter the number of rows and columns for matrix 1: ");
+    scanf("%d %d", &m1, &n1);
+    printf("Enter elements of matrix 1:\n");
+    for (i = 0; i < m1; i++) 
+    {
+        for (j = 0; j < n1; j++) 
+        {
+            scanf("%d", &A[i][j]);
+        }
+    }
+    printf("Enter the number of rows and columns for matrix 2: ");
+    scanf("%d %d", &m2, &n2);
+    printf("Enter elements of matrix 2:\n");
+    for (i = 0; i < m2; i++) 
+    {
+        for (j = 0; j < n2; j++) 
+        {
+            scanf("%d", &B[i][j]);
+        }
+    }
+    if (n1 != m2) 
+    {
+        printf("Error! Number of columns in matrix 1 should be equal to number of rows in matrix 2.\n");
+        return 1;
+    }
+    for (i = 0; i < m1; i++) 
+    {
+        for (j = 0; j < n2; j++) 
+        {
+            sum = 0;
+            for (k = 0; k < m1; k++) 
+            {
+                sum += A[i][k] * B[k][j];
+            }
+            C[i][j] = sum;
+            printf("%d ", C[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+
