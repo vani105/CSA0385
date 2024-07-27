@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<string.h>
+struct student
+{
+    int rollno;
+    char name[30];
+    char branch[40];
+    int batch;
+};
+int main()
+{
+    struct student s1;
+    struct student *ptr=&s1;
+    s1.rollno=21;
+    strcpy(s1.name,"vani");
+    strcpy(s1.branch,"cse-ai");
+    s1.batch=2023;
+    printf("roll number:%d\n",(*ptr).rollno);
+    printf("name:%s\n",(*ptr).name);
+    printf("branch:%s\n",(*ptr).branch);
+    printf("batch:%d\n",(*ptr).batch);
+    return 0;
+}
