@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 100
+
+char stack[MAX];
+int top = -1;
+
+void push(char item) {
+    if (top == MAX - 1) {
+        printf("Stack Overflow\n");
+        return;
+    }
+    stack[++top] = item;
+}
+
+char pop() {
+    if (top == -1) {
+        printf("Stack Underflow\n");
+        return -1;
+    }
+    return stack[top--];
+}
+
+int precedence(char symbol) {
+    switch(symbol) {
+        case '+':
+        case '-':
+            return 1;
+        case '*':
+        case '/':
+            return 2;
+        case '^':
+            return 3;
+        default:
+            return 0;
+    }
+}
+
+void infixToPostfix(char* infix) {
+    char postfix[MAX];
+    int i = 0, j = 0;
+    char symbol;
+
+    while ((symbol = infix[i++]) != '\0') {
+        if (symbol == ' ' || symbol == '\t') {
+            continue;
+        }
+        if (symbol == '(') {
+            push(symbol);
+        } else if (isalnum(symbol)) {
+            postfix[j++] = symbol;
+        } else if (symbol == ')') {
+            while (stack[top] != '(') {
+                postfix[j++] = pop();
+            }
+            top--; // Discard '(' from stack
+        } else {
+            while (precedence(stack[top]) >= precedence(symbol)) {
+                postfix[j++] = pop();
+            }
+            push(symbol);
+        }
+    }
+
+    while (top != -1) {
+        postfix[j++] = pop();
+    }
+    postfix[j] = '\0';
+
+    printf("Postfix Expression: %s\n", postfix);
+}
+
+int main() {
+    char infix[MAX];
+
+    printf("Enter Infix Expression: ");
+    fgets(infix, MAX, stdin);
+
+    infixToPostfix(infix);
+
+    return 0;
+}
