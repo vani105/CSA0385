@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+    struct Node* prev;
+};
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
+}
+void insertEnd(struct Node** head, int data) {
+    struct Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+    struct Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    newNode->prev = temp;
+}
+void displayList(struct Node* node) {
+    struct Node* last;
+    printf("Traversal in forward direction:\n");
+    while (node != NULL) {
+        printf("%d ", node->data);
+        last = node;
+        node = node->next;
+    }
+    printf("\nTraversal in reverse direction:\n");
+    while (last != NULL) {
+        printf("%d ", last->data);
+        last = last->prev;
+    }
+    printf("\n");
+}
+int main() {
+    struct Node* head = NULL;
+    insertEnd(&head, 10);
+    insertEnd(&head, 20);
+    insertEnd(&head, 30);
+    displayList(head);
+    return 0;
+}
